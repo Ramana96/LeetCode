@@ -2,37 +2,48 @@ package problem_532;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class KDiffPairs {
     public static void main(String[] args) {
         KDiffPairs kDiffPairs = new KDiffPairs();
-        int x = kDiffPairs.findPairs(new int[]{1, 1, 1, 2, 1}, 1);
+        int x = kDiffPairs.findPairs(new int[]{1,1,1,2,1}, 1);
         System.out.println(x);
 
     }
 
     public int findPairs(int[] nums, int k) {
-        int count = 0, len = nums.length, x = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-
-        if (k >= 0) {
-
-//            arrayList.add(nums[0]);
-            for (int i = 0; i < len; i++) {
-                ArrayList<Integer> arrayList = new ArrayList<Integer>();
-                for (int j = i + 1; j < len; j++) {
-                    if (!arrayList.contains(nums[j])) {
-                        x = nums[i] - nums[j];
-                        if (x == k || x == -1 * k) {
-                            count++;
-                            arrayList.add(nums[j]);
-                        }
+        HashMap<Integer, HashSet<Integer>> listHashMap = new HashMap<>();
+        int count = 0, len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (Math.abs(nums[i] - nums[j]) == k) {
+                    if (nums[i] > nums[j]) {
+                        count = send(listHashMap, nums[j], nums[i], count);
+                    } else {
+                        count = send(listHashMap, nums[i], nums[j], count);
                     }
-
                 }
             }
         }
         return count;
+    }
+
+
+    public int send(HashMap<Integer, HashSet<Integer>> hashSetHashMap, int key, int value, int count) {
+        if (hashSetHashMap.containsKey(key)) {
+            if (hashSetHashMap.get(key).add(value)) {
+                count++;
+            }
+
+        } else {
+            HashSet<Integer> set = new HashSet<>();
+            set.add(value);
+            hashSetHashMap.put(key, set);
+            count++;
+        }
+        return count;
+
     }
 }

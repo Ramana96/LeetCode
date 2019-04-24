@@ -9,8 +9,8 @@ public class ArrangeCoins {
     }
 
     public int arrangeCoins(int n) {
-        double no = -1 * (-1 - Math.sqrt((1 + 8 * n))) / 2;
+        double no = -1 * (-1 - (Math.sqrt(1) +( Math.sqrt(8) * Math.sqrt(n))) / 2);
 //        System.out.println(no);
-        return (int) no  - 1;
+        return (int) no  - 2;
     }
 }

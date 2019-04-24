@@ -6,7 +6,8 @@ public class MergeTwoBinaryTrees {
         t1.left = new TreeNode(4);
         t1.right = new TreeNode(5);
         t1.left.left = new TreeNode(1);
-        t1.left.right = new TreeNode(2);
+        t1.left.left.right = new TreeNode(9);
+//        t1.left.right = new TreeNode(2);
         TreeNode t2 = new TreeNode(4);
         t2.left = new TreeNode(1);
         t2.right = new TreeNode(2);
@@ -26,8 +27,8 @@ public class MergeTwoBinaryTrees {
             return t1;
         }
         TreeNode t3 = preOrderprintTreerintTree(t1, t2);
-        inOrderPrintTree(t3);
-        return t3;
+//        inOrderPrintTree(t3);
+        return t1;
     }
 
 
@@ -45,7 +46,7 @@ public class MergeTwoBinaryTrees {
             if (node1.right == null && node2.right != null) {
                 node1.right = new TreeNode(0);
             } else if (node1.right != null && node2.right == null) {
-                node2.left = new TreeNode(0);
+                node2.right = new TreeNode(0);
             } else {
             }
 
@@ -57,7 +58,11 @@ public class MergeTwoBinaryTrees {
 
 
     public void inOrderPrintTree(TreeNode node) {
-        System.out.println(node.val  );
+        if (node!=null) {
+            System.out.println(node.val);
+            inOrderPrintTree(node.left);
+            inOrderPrintTree(node.right);
+        }
     }
 }
 
